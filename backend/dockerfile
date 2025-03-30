@@ -1,0 +1,18 @@
+FROM node:18-alpine
+
+WORKDIR /usr/src/app
+
+# Copiar archivos de dependencias
+COPY package*.json ./
+
+# Instalar dependencias
+RUN npm install
+
+# Copiar el resto de los archivos
+COPY . .
+
+# Puerto que usa Express
+EXPOSE 5000
+
+# Comando para iniciar el servidor
+CMD ["npm", "start"]
