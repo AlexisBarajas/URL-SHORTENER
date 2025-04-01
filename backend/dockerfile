@@ -1,18 +1,19 @@
-FROM node:18-alpine
+FROM node:20.13.1-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalar dependencias
-RUN npm install
-
 # Copiar el resto de los archivos
 COPY . .
 
+# Instalar dependencias
+RUN npm ci --only=prodyction
+# RUN npm run dev
+
 # Puerto que usa Express
-EXPOSE 5000
+EXPOSE 3000
 
 # Comando para iniciar el servidor
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
